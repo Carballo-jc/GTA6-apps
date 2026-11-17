@@ -50,3 +50,9 @@
 .estrellas { margin: 0; font-size: 1.8rem; color: var(--sol); letter-spacing: 0.2rem; }
 .delitos { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.5rem; font-size: 0.95rem; }
 .delitos li { padding: 0.5rem; border-radius: 0.5rem; background: rgba(0,0,0,0.35); }
+.card { overflow: hidden; }
+.card > *:not(.card-escena) { position: relative; z-index: 1; }
+.card .marca { position: absolute; }
+.card-escena { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: auto; z-index: 0; pointer-events: none; }
+.sticker { margin: 0; font-size: 3.2rem; line-height: 1; filter: drop-shadow(0 0 0.8rem var(--rosa)); }
+.card { padding-bottom: 38%; }

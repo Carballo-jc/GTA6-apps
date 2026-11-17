@@ -2,6 +2,7 @@ import type { Pagina } from '../router';
 import { descargarImagen, compartirImagen } from '../lib/share';
 import { REFERENCIAS, DIAS_LABORALES_POR_SEMANA, SEMANAS_POR_MES, PRECIOS_USD } from '../config/referencias';
 import { SITE_URL } from '../config/site';
+import { ESCENA_SVG, STICKERS_LABURO, elegir } from '../lib/arte';
 
 const nf = new Intl.NumberFormat('es-AR', { maximumFractionDigits: 1 });
 const nf0 = new Intl.NumberFormat('es-AR', { maximumFractionDigits: 0 });
@@ -48,6 +49,8 @@ export const laburo: Pagina = (el) => {
       </form>
       <div id="salida" hidden>
         <div id="tarjeta" class="card neon-card">
+          ${ESCENA_SVG}
+          <p class="sticker" id="c-sticker"></p>
           <p class="card-top">Mi GTA 6 me cuesta</p>
           <p class="card-big" id="c-horas"></p>
           <p class="card-mid" id="c-dias"></p>
@@ -89,12 +92,17 @@ export const laburo: Pagina = (el) => {
     (el.querySelector('#c-dias') as HTMLElement).textContent = `≈ ${nf.format(r.dias)} días laborales`;
     (el.querySelector('#c-frase') as HTMLElement).textContent = r.frase;
     (el.querySelector('#c-precio') as HTMLElement).textContent = `Precio: $${nf0.format(r.precioArs)}`;
+    (el.querySelector('#c-sticker') as HTMLElement).textContent = elegir(STICKERS_LABURO, Math.random);
     salida.hidden = false;
     salida.scrollIntoView({ behavior: 'smooth' });
   });
 
   el.querySelector('#descargar')?.addEventListener('click', () => descargarImagen(tarjeta, 'gta6-laburo'));
-  el.querySelector('#compartir')?.addEventListener('click', () =>
-    compartirImagen(tarjeta, 'gta6-laburo', 'Calculé cuántas horas de laburo me cuesta GTA 6 😅'),
-  );
+  const btnCompartir = el.querySelector('#compartir') as HTMLButtonElement;
+  btnCompartir.addEventListener('click', async () => {
+    const resultado = await compartirImagen(tarjeta, 'gta6-laburo', 'Calculé cuántas horas de laburo me cuesta GTA 6 😅');
+    const mensajes = { compartido: '¡Compartido!', copiado: '¡Imagen copiada! Pegala donde quieras', descargado: 'Descargada' };
+    btnCompartir.textContent = mensajes[resultado];
+    setTimeout(() => (btnCompartir.textContent = 'Compartir'), 2500);
+  });
 };

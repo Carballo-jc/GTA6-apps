@@ -3,12 +3,14 @@ import { descargarImagen, compartirImagen } from '../lib/share';
 import { crearPrng, hashString, normalizar } from '../lib/hash';
 import { CRIMENES, ALIAS_NOMBRES } from '../config/crimenes';
 import { SITE_URL } from '../config/site';
+import { ESCENA_SVG, STICKERS_FICHA, elegir } from '../lib/arte';
 
 interface Ficha {
   expediente: string;
   estrellas: number;
   alias: string;
   delitos: string[];
+  sticker: string;
 }
 
 function generarFicha(nombre: string): Ficha {
@@ -22,7 +24,8 @@ function generarFicha(nombre: string): Ficha {
     const idx = Math.floor(rnd() * pool.length);
     delitos.push(pool.splice(idx, 1)[0]);
   }
-  return { expediente, estrellas, alias, delitos };
+  const sticker = elegir(STICKERS_FICHA, rnd);
+  return { expediente, estrellas, alias, delitos, sticker };
 }
 
 function escapar(texto: string): string {
@@ -44,6 +47,8 @@ export const ficha: Pagina = (el) => {
       </form>
       <div id="salida" hidden>
         <div id="tarjeta" class="card neon-card celeste-card">
+          ${ESCENA_SVG}
+          <p class="sticker" id="f-sticker"></p>
           <p class="card-top">DEPARTAMENTO DE POLICÍA · VICE CITY (ficticio)</p>
           <div id="foto" class="foto" hidden></div>
           <p class="card-big" id="f-nombre"></p>
@@ -85,6 +90,7 @@ export const ficha: Pagina = (el) => {
     (el.querySelector('#f-exp') as HTMLElement).textContent = `Expediente N° ${f.expediente}`;
     (el.querySelector('#f-estrellas') as HTMLElement).textContent = '★'.repeat(f.estrellas) + '☆'.repeat(5 - f.estrellas);
     (el.querySelector('#f-delitos') as HTMLElement).innerHTML = f.delitos.map((d) => `<li>${escapar(d)}</li>`).join('');
+    (el.querySelector('#f-sticker') as HTMLElement).textContent = f.sticker;
     if (fotoUrl) URL.revokeObjectURL(fotoUrl);
     if (archivo) {
       fotoUrl = URL.createObjectURL(archivo);
@@ -99,7 +105,11 @@ export const ficha: Pagina = (el) => {
   });
 
   el.querySelector('#descargar')?.addEventListener('click', () => descargarImagen(tarjeta, 'gta6-ficha'));
-  el.querySelector('#compartir')?.addEventListener('click', () =>
-    compartirImagen(tarjeta, 'gta6-ficha', 'Mi ficha criminal de Vice City 🚨'),
-  );
+  const btnCompartir = el.querySelector('#compartir') as HTMLButtonElement;
+  btnCompartir.addEventListener('click', async () => {
+    const resultado = await compartirImagen(tarjeta, 'gta6-ficha', 'Mi ficha criminal de Vice City 🚨');
+    const mensajes = { compartido: '¡Compartido!', copiado: '¡Imagen copiada! Pegala donde quieras', descargado: 'Descargada' };
+    btnCompartir.textContent = mensajes[resultado];
+    setTimeout(() => (btnCompartir.textContent = 'Compartir'), 2500);
+  });
 };
