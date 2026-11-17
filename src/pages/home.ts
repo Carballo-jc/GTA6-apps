@@ -1,6 +1,6 @@
 import type { Pagina } from '../router';
 import { CAFECITO_URL, FECHA_LANZAMIENTO } from '../config/site';
-import { ICONO_CALC, ICONO_COMPLICES, ICONO_FICHA, ICONO_TAZA } from '../lib/arte';
+import { CALLE_SVG, ICONO_CALC, ICONO_COMPLICES, ICONO_FICHA, ICONO_TAZA } from '../lib/arte';
 
 const dos = (n: number): string => String(n).padStart(2, '0');
 const flecha = '<span class="flecha" aria-hidden="true">›</span>';
@@ -30,6 +30,7 @@ export const home: Pagina = (el) => {
           ${flecha}
         </a>
       </nav>
+      <div class="calle">${CALLE_SVG}</div>
       <aside class="cafe">
         <p class="cafe-pregunta">¿Te gustó?</p>
         <div class="cafe-caja">

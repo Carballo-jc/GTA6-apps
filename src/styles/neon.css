@@ -113,3 +113,13 @@ body[data-ruta="/"] .footer .cafecito { display: none; }
 @media (prefers-reduced-motion: reduce) { .cafe-caja::after { animation: none; } }
 .form { grid-template-columns: minmax(0, 1fr); }
 .form input, .form select { width: 100%; min-width: 0; }
+
+/* Calle con autos + más aire antes del CTA de Cafecito */
+.calle { margin: 2rem -0.5rem 0; filter: drop-shadow(0 0 0.8rem rgba(255,79,163,0.35)); }
+.calle svg { width: 100%; height: auto; display: block; }
+.auto-a { animation: rodar-a 7s ease-in-out infinite alternate; }
+.auto-b { animation: rodar-b 8s ease-in-out infinite alternate; }
+@keyframes rodar-a { from { transform: translateX(0); } to { transform: translateX(0.9rem); } }
+@keyframes rodar-b { from { transform: translateX(0); } to { transform: translateX(-0.9rem); } }
+.cafe { margin-top: 1.2rem; }
+@media (prefers-reduced-motion: reduce) { .auto-a, .auto-b { animation: none; } }

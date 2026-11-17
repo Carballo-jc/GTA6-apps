@@ -71,3 +71,26 @@ export const ICONO_CALC = `<svg viewBox="0 0 24 24" fill="none" stroke="currentC
 export const ICONO_FICHA = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="15" rx="2.5"/><circle cx="9" cy="10.5" r="2.2"/><path d="M5.5 17c.6-2 2-3 3.5-3s2.9 1 3.5 3M14.5 9.5h4M14.5 13h4"/></svg>`;
 export const ICONO_COMPLICES = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M5.5 10h13M6 10c0 2.2 1.6 3.5 3.2 3.5S12 12.2 12 10M12 10c0 2.2 1.2 3.5 2.8 3.5S18 12.2 18 10M9 17c1 .8 2 1.2 3 1.2s2-.4 3-1.2"/></svg>`;
 export const ICONO_TAZA = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9h13v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5z"/><path d="M17 10.5h1.5a2.5 2.5 0 0 1 0 5H16.5"/><path d="M9 3.5c-.8 1 .8 1.8 0 3M12.5 3.5c-.8 1 .8 1.8 0 3"/></svg>`;
+
+// Calle neón con dos deportivos genéricos (dibujo propio, sin marcas ni modelos reales).
+export const CALLE_SVG = `
+<svg viewBox="0 0 360 84" aria-hidden="true">
+  <defs>
+    <symbol id="auto" viewBox="0 0 120 40">
+      <ellipse cx="60" cy="37" rx="52" ry="4" fill="currentColor" opacity="0.45"/>
+      <path d="M4 29c0-4 6-6 18-7l18-7c8-3 30-3 40 0l20 7c12 1 17 3 17 7v3H4z" fill="currentColor"/>
+      <path d="M43 16l8-3.5h21l10 3.5z" fill="#0b0418" opacity="0.8"/>
+      <path d="M22 22l18-7c8-3 30-3 40 0l20 7" fill="none" stroke="#fff" stroke-opacity="0.45" stroke-width="1"/>
+      <rect x="3" y="25" width="7" height="3" rx="1.5" fill="#ff2e5f"/>
+      <rect x="110" y="26" width="7" height="3" rx="1.5" fill="#fff6c8"/>
+      <circle cx="28" cy="32" r="6" fill="#0b0418" stroke="#fff" stroke-opacity="0.7" stroke-width="1.2"/>
+      <circle cx="94" cy="32" r="6" fill="#0b0418" stroke="#fff" stroke-opacity="0.7" stroke-width="1.2"/>
+    </symbol>
+  </defs>
+  <rect y="52" width="360" height="32" fill="#12062a" opacity="0.85"/>
+  <path d="M0 53h360" stroke="#5ef2ff" stroke-width="1.5" opacity="0.7"/>
+  <path d="M0 74h360" stroke="#ff4fa3" stroke-width="1.5" opacity="0.6"/>
+  <path d="M10 64h40M80 64h40M150 64h40M220 64h40M290 64h40" stroke="#fff" stroke-opacity="0.45" stroke-width="2" stroke-linecap="round"/>
+  <g class="auto-a" style="color:#ff2e93"><use href="#auto" x="14" y="22" width="132" height="44"/></g>
+  <g class="auto-b" style="color:#18c8e8"><use href="#auto" x="214" y="22" width="132" height="44" transform="translate(560 0) scale(-1 1)"/></g>
+</svg>`;
