@@ -56,3 +56,11 @@
 .card-escena { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: auto; z-index: 0; pointer-events: none; }
 .sticker { margin: 0; font-size: 3.2rem; line-height: 1; filter: drop-shadow(0 0 0.8rem var(--rosa)); }
 .card { padding-bottom: 38%; }
+.acciones .largo { grid-column: 1 / -1; }
+.cuenta { margin: 1rem 0; }
+.cuenta-titulo { margin: 0 0 0.5rem; font-size: 0.85rem; letter-spacing: 0.1rem; text-transform: uppercase; opacity: 0.85; }
+.cuenta-celdas { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; }
+.celda { padding: 0.6rem 0.2rem; border-radius: 0.6rem; background: rgba(0,0,0,0.4); border: 2px solid var(--celeste); box-shadow: 0 0 0.7rem var(--celeste); }
+.celda strong { display: block; font-size: 1.6rem; font-variant-numeric: tabular-nums; }
+.celda span { font-size: 0.7rem; opacity: 0.8; text-transform: uppercase; }
+.cuenta-fin { font-size: 1.4rem; font-weight: 800; color: var(--sol); margin: 0; }

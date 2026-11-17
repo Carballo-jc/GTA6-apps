@@ -29,3 +29,5 @@ export const STICKERS_FICHA = ['🚨', '🕶️', '🌴', '🚓', '🔦', '🧢'
 export function elegir<T>(lista: T[], azar: () => number): T {
   return lista[Math.floor(azar() * lista.length)];
 }
+
+export const STICKERS_COMPLICES = ['🤝', '🕶️', '🚗', '💥', '🔥', '🌴', '🎭', '💰'];

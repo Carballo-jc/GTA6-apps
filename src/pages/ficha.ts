@@ -1,5 +1,5 @@
 import type { Pagina } from '../router';
-import { descargarImagen, compartirImagen } from '../lib/share';
+import { descargarImagen, compartirImagen, copiarEnlace } from '../lib/share';
 import { crearPrng, hashString, normalizar } from '../lib/hash';
 import { CRIMENES, ALIAS_NOMBRES } from '../config/crimenes';
 import { SITE_URL } from '../config/site';
@@ -61,6 +61,7 @@ export const ficha: Pagina = (el) => {
         <div class="acciones">
           <button id="descargar" class="btn" type="button">Descargar imagen</button>
           <button id="compartir" class="btn alt" type="button">Compartir</button>
+          <button id="copiar" class="btn alt largo" type="button">Copiar link</button>
         </div>
       </div>
     </section>
@@ -72,16 +73,20 @@ export const ficha: Pagina = (el) => {
   const error = el.querySelector('#error') as HTMLElement;
   const fotoBox = el.querySelector('#foto') as HTMLElement;
   let fotoUrl: string | null = null;
+  let nombreActual = '';
 
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const nombre = (form.elements.namedItem('nombre') as HTMLInputElement).value.trim();
-    const archivo = (form.elements.namedItem('foto') as HTMLInputElement).files?.[0];
+  const inputNombre = form.elements.namedItem('nombre') as HTMLInputElement;
+  const inputFoto = form.elements.namedItem('foto') as HTMLInputElement;
+
+  const enlaceFicha = (nombre: string): string =>
+    `${window.location.origin}/ficha?n=${encodeURIComponent(nombre)}`;
+
+  const mostrarFicha = (nombre: string, archivo?: File): boolean => {
     if (!nombre) {
       error.textContent = 'Poné un nombre o apodo.';
       error.hidden = false;
       salida.hidden = true;
-      return;
+      return false;
     }
     error.hidden = true;
     const f = generarFicha(nombre);
@@ -100,16 +105,38 @@ export const ficha: Pagina = (el) => {
       fotoUrl = null;
       fotoBox.hidden = true;
     }
+    nombreActual = nombre;
+    history.replaceState(null, '', `/ficha?n=${encodeURIComponent(nombre)}`);
     salida.hidden = false;
-    salida.scrollIntoView({ behavior: 'smooth' });
+    return true;
+  };
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (mostrarFicha(inputNombre.value.trim(), inputFoto.files?.[0])) {
+      salida.scrollIntoView({ behavior: 'smooth' });
+    }
   });
+
+  const nombreEnUrl = new URLSearchParams(window.location.search).get('n')?.trim().slice(0, 30);
+  if (nombreEnUrl) {
+    inputNombre.value = nombreEnUrl;
+    mostrarFicha(nombreEnUrl);
+  }
 
   el.querySelector('#descargar')?.addEventListener('click', () => descargarImagen(tarjeta, 'gta6-ficha'));
   const btnCompartir = el.querySelector('#compartir') as HTMLButtonElement;
   btnCompartir.addEventListener('click', async () => {
-    const resultado = await compartirImagen(tarjeta, 'gta6-ficha', 'Mi ficha criminal de Vice City 🚨');
+    const resultado = await compartirImagen(
+      tarjeta,
+      'gta6-ficha',
+      'Mi ficha criminal de Vice City 🚨',
+      enlaceFicha(nombreActual),
+    );
     const mensajes = { compartido: '¡Compartido!', copiado: '¡Imagen copiada! Pegala donde quieras', descargado: 'Descargada' };
     btnCompartir.textContent = mensajes[resultado];
     setTimeout(() => (btnCompartir.textContent = 'Compartir'), 2500);
   });
+  const btnCopiar = el.querySelector('#copiar') as HTMLButtonElement;
+  btnCopiar.addEventListener('click', () => copiarEnlace(btnCopiar, enlaceFicha(nombreActual)));
 };

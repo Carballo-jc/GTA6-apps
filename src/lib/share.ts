@@ -20,14 +20,19 @@ export async function descargarImagen(nodo: HTMLElement, nombre: string): Promis
 
 export type ResultadoCompartir = 'compartido' | 'copiado' | 'descargado';
 
-export async function compartirImagen(nodo: HTMLElement, nombre: string, texto: string): Promise<ResultadoCompartir> {
+export async function compartirImagen(
+  nodo: HTMLElement,
+  nombre: string,
+  texto: string,
+  url: string = window.location.origin,
+): Promise<ResultadoCompartir> {
   const blob = await renderizar(nodo);
   const archivo = new File([blob], `${nombre}.png`, { type: 'image/png' });
   const nav = navigator as Navigator & { canShare?: (d: ShareData) => boolean };
 
   if (nav.share && nav.canShare && nav.canShare({ files: [archivo] })) {
     try {
-      await nav.share({ files: [archivo], text: texto, url: window.location.origin });
+      await nav.share({ files: [archivo], text: texto, url });
       return 'compartido';
     } catch (e) {
       if ((e as DOMException).name === 'AbortError') return 'compartido';
@@ -45,4 +50,36 @@ export async function compartirImagen(nodo: HTMLElement, nombre: string, texto: 
 
   await descargarImagen(nodo, nombre);
   return 'descargado';
+}
+
+function copiarConSeleccion(texto: string): boolean {
+  const area = document.createElement('textarea');
+  area.value = texto;
+  area.setAttribute('readonly', '');
+  area.style.position = 'fixed';
+  area.style.opacity = '0';
+  document.body.appendChild(area);
+  area.select();
+  let ok = false;
+  try {
+    ok = document.execCommand('copy');
+  } catch {
+    ok = false;
+  }
+  document.body.removeChild(area);
+  return ok;
+}
+
+/** Copia un link al portapapeles (con respaldo para navegadores viejos) y avisa en el botón. */
+export async function copiarEnlace(boton: HTMLButtonElement, enlace: string): Promise<void> {
+  const original = boton.textContent;
+  let copiado = false;
+  try {
+    await navigator.clipboard.writeText(enlace);
+    copiado = true;
+  } catch {
+    copiado = copiarConSeleccion(enlace);
+  }
+  boton.textContent = copiado ? '¡Link copiado!' : 'No se pudo copiar';
+  setTimeout(() => (boton.textContent = original), 2500);
 }

@@ -4,6 +4,7 @@ import { iniciarRouter } from './router';
 import { home } from './pages/home';
 import { laburo } from './pages/laburo';
 import { ficha } from './pages/ficha';
+import { complices } from './pages/complices';
 import { CAFECITO_URL, DISCLAIMER } from './config/site';
 
 const app = document.getElementById('app') as HTMLElement;
@@ -15,4 +16,4 @@ app.innerHTML = `
   </footer>
 `;
 
-iniciarRouter({ '/': home, '/laburo': laburo, '/ficha': ficha }, document.getElementById('vista') as HTMLElement);
+iniciarRouter({ '/': home, '/laburo': laburo, '/ficha': ficha, '/complices': complices }, document.getElementById('vista') as HTMLElement);
