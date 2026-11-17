@@ -1,0 +1,52 @@
+.titulo-neon {
+  font-size: 2.6rem; line-height: 1.1; margin: 0.5rem 0; text-align: center; color: #fff;
+  text-shadow: 0 0 0.4rem var(--rosa), 0 0 1.2rem var(--rosa), 0 0 2.4rem var(--violeta);
+}
+.titulo-neon.chico { font-size: 1.6rem; }
+.titulo-neon.celeste-t { text-shadow: 0 0 0.4rem var(--celeste), 0 0 1.2rem var(--celeste), 0 0 2.4rem var(--violeta); }
+.hero { text-align: center; }
+.sol {
+  width: 9rem; height: 9rem; margin: 1rem auto 0; border-radius: 50%;
+  background: linear-gradient(180deg, var(--sol) 0%, var(--rosa) 100%);
+  box-shadow: 0 0 3rem var(--rosa);
+  -webkit-mask-image: repeating-linear-gradient(180deg, #000 0 0.6rem, transparent 0.6rem 0.75rem);
+  mask-image: repeating-linear-gradient(180deg, #000 0 0.6rem, transparent 0.6rem 0.75rem);
+}
+.sub { opacity: 0.9; }
+.menu { display: grid; gap: 1rem; margin-top: 1.5rem; }
+.tarjeta-link {
+  display: block; padding: 1.1rem; border-radius: 0.9rem; text-decoration: none; color: #fff;
+  background: rgba(0,0,0,0.35); border: 2px solid var(--rosa); box-shadow: 0 0 1rem var(--rosa);
+}
+.tarjeta-link.celeste { border-color: var(--celeste); box-shadow: 0 0 1rem var(--celeste); }
+.tarjeta-link span { display: block; font-size: 0.85rem; opacity: 0.8; margin-top: 0.25rem; }
+.volver { display: inline-block; margin-bottom: 0.5rem; text-decoration: none; }
+.form { display: grid; gap: 0.9rem; margin: 1rem 0; }
+.form label { display: grid; gap: 0.3rem; font-size: 0.95rem; }
+.form input, .form select {
+  padding: 0.75rem; font-size: 1rem; border-radius: 0.6rem; border: 2px solid var(--violeta);
+  background: rgba(0,0,0,0.4); color: #fff;
+}
+.btn {
+  padding: 0.85rem 1rem; font-size: 1rem; font-weight: 700; border: 0; border-radius: 0.7rem; cursor: pointer;
+  background: var(--rosa); color: #1a0b2e; box-shadow: 0 0 0.9rem var(--rosa);
+}
+.btn.alt { background: var(--celeste); box-shadow: 0 0 0.9rem var(--celeste); }
+.error { color: #ffb3b3; margin: 0; }
+.acciones { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-top: 1rem; }
+.card {
+  width: 100%; aspect-ratio: 9 / 16; padding: 1.5rem 1.25rem; border-radius: 1rem;
+  display: flex; flex-direction: column; justify-content: center; gap: 0.9rem; text-align: center; position: relative;
+  background: linear-gradient(180deg, #1a0b2e 0%, #5a1a7a 55%, #ff4fa3 100%);
+  border: 3px solid var(--rosa);
+}
+.celeste-card { border-color: var(--celeste); background: linear-gradient(180deg, #0b1230 0%, #3b1260 60%, #9b5cff 100%); }
+.card-top { margin: 0; font-size: 0.8rem; letter-spacing: 0.1rem; text-transform: uppercase; opacity: 0.85; }
+.card-big { margin: 0; font-size: 2.2rem; font-weight: 800; text-shadow: 0 0 1rem var(--rosa); overflow-wrap: anywhere; }
+.card-mid { margin: 0; font-size: 1.3rem; color: var(--celeste); }
+.card-text, .card-precio { margin: 0; font-size: 1rem; }
+.marca { position: absolute; bottom: 0.75rem; left: 0; right: 0; margin: 0; font-size: 0.75rem; opacity: 0.8; }
+.foto { width: 7rem; height: 7rem; margin: 0 auto; border-radius: 0.6rem; border: 3px solid var(--celeste); background-size: cover; background-position: center; }
+.estrellas { margin: 0; font-size: 1.8rem; color: var(--sol); letter-spacing: 0.2rem; }
+.delitos { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.5rem; font-size: 0.95rem; }
+.delitos li { padding: 0.5rem; border-radius: 0.5rem; background: rgba(0,0,0,0.35); }
