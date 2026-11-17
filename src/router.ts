@@ -4,6 +4,7 @@ export function iniciarRouter(rutas: Record<string, Pagina>, contenedor: HTMLEle
   const renderizar = () => {
     const ruta = window.location.pathname.replace(/\/+$/, '') || '/';
     const pagina = rutas[ruta] ?? rutas['/'];
+    document.body.dataset.ruta = ruta in rutas ? ruta : '/';
     contenedor.innerHTML = '';
     pagina(contenedor);
     window.scrollTo(0, 0);

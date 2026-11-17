@@ -6,9 +6,11 @@ import { laburo } from './pages/laburo';
 import { ficha } from './pages/ficha';
 import { complices } from './pages/complices';
 import { CAFECITO_URL, DISCLAIMER } from './config/site';
+import { FONDO_SVG } from './lib/arte';
 
 const app = document.getElementById('app') as HTMLElement;
 app.innerHTML = `
+  <div class="fondo">${FONDO_SVG}</div>
   <main id="vista" class="vista"></main>
   <footer class="footer">
     <p>${DISCLAIMER}</p>
